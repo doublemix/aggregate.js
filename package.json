@@ -1,0 +1,26 @@
+{
+  "name": "@doublemx2/aggregate.js",
+  "version": "0.1.0",
+  "description": "Small library for working manipulating lists of data and getting aggregates",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec",
+    "cover": "node ./node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doublemix/aggregate.js.git"
+  },
+  "author": "Mitchel Myers <doublemx2@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/doublemix/aggregate.js/issues"
+  },
+  "homepage": "https://github.com/doublemix/aggregate.js#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.1.0"
+  }
+}
