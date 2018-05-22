@@ -1,11 +1,13 @@
 {
   "name": "@doublemx2/aggregate.js",
   "version": "0.1.0",
-  "description": "Small library for working manipulating lists of data and getting aggregates",
-  "main": "index.js",
+  "description": "Small library for manipulating lists of data and getting aggregates",
+  "main": ".compiled/index.js",
   "scripts": {
-    "test": "mocha --reporter spec",
-    "cover": "node ./node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
+    "test": "mocha",
+    "cover": "node ./node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha",
+    "build": "babel src --out-dir .compiled --source-maps",
+    "dev-build": "babel src --out-dir .compiled --source-maps --watch"
   },
   "repository": {
     "type": "git",
@@ -18,9 +20,22 @@
   },
   "homepage": "https://github.com/doublemix/aggregate.js#readme",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.1.0"
+    "istanbul": "^1.1.0-alpha.1",
+    "mocha": "^5.1.0",
+    "moment": "^2.22.1"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "deep-equal": "^1.0.1",
+    "lodash": "^4.17.5"
   }
 }

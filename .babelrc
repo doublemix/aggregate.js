@@ -1,0 +1,10 @@
+{
+    "presets": [
+        "env"
+      ],
+    "sourceMaps": true,
+    "retainLines": true,
+    "plugins": [
+        "transform-regenerator"
+    ]
+}
