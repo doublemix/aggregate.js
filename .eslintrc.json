@@ -73,7 +73,6 @@
         "no-use-before-define": "warn",
         "array-bracket-newline": ["warn", "consistent"],
         "array-bracket-spacing": ["warn", "never"],
-        "array-element-newline": ["warn", { "multiline": true }],
         "comma-dangle": ["warn", "always-multiline"],
         "eol-last": ["warn", "always"],
         "function-paren-newline": ["warn", "consistent"],
@@ -85,7 +84,7 @@
         "object-curly-newline": ["warn", { "consistent": true }],
         "object-curly-spacing": ["warn", "always"],
         "object-property-newline": ["warn", { "allowAllPropertiesOnSameLine": true }],
-        "quotes": ["warn", "double", { "allowTemplateLiterals": true }],
+        "quotes": ["warn", "single", { "allowTemplateLiterals": true }],
         "semi": ["warn", "always"],
         "no-class-assign": "warn",
         "no-dupe-class-members": "warn",
@@ -93,6 +92,5 @@
         "no-this-before-super": "warn",
         "prefer-const": "warn",
         "require-yield": "warn"
-        
     }
 }

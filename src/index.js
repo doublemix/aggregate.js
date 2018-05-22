@@ -1,8 +1,8 @@
 'use strict';
 
-import { sum, count, mean, Dataset } from "./Dataset";
+import { sum, count, mean, Dataset } from './Dataset';
 
-module.exports = {
+export default {
     data: data => new Dataset(data),
     sum,
     count,

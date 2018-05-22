@@ -1,9 +1,9 @@
-import makeData from "./makeData";
-import { createNamedAccessor, createAccessor } from "./createAccessor";
-import InternalDatasource from "./InternalDatasource";
-import deepEqual from "deep-equal";
-import { orderBy } from "lodash";
-import combineObjects from "./combineObjects";
+import makeData from './makeData';
+import { createNamedAccessor, createAccessor } from './createAccessor';
+import InternalDatasource from './InternalDatasource';
+import deepEqual from 'deep-equal';
+import { orderBy } from 'lodash';
+import combineObjects from './combineObjects';
 
 
 function partition (data, accessor) {
@@ -51,7 +51,7 @@ function applyAggregate (datasource, aggregator) {
         return new InternalDatasource([aggregator(datasource.data)], 0, { aggregated: true });
     } else if (datasource.level === 1) {
         const data = datasource.data.map(datum => combineObjects(
-            datum.getMetadata("grouping", { values: {} }).values,
+            datum.getMetadata('grouping', { values: {} }).values,
             aggregator(datum.data),
         ));
         return new InternalDatasource(data, 0, datasource.metadata);
@@ -149,39 +149,39 @@ export class Dataset {
         return new Dataset(applyOrderBy(this.data, accessors));
     }
     value () {
-        if (this.data.getMetadata("aggregated", false)) {
+        if (this.data.getMetadata('aggregated', false)) {
             return this.data.data[0];
         } else {
             return createValue(this.data);
         }
     }
     sum (selector = undefined, inName = undefined) {
-        if (this.data.getMetadata("datatype") === "number") {
+        if (this.data.getMetadata('datatype') === 'number') {
             return this.aggregate(sum);
         }
         const { accessor, name } = createNamedAccessor(selector);
         return this.aggregate({
             aggregator: items => sum(items, accessor),
-            name: inName || (name && `sum(${name})`) || "sum", 
+            name: inName || (name && `sum(${name})`) || 'sum',
         });
     }
     count (inName = undefined) {
-        if (this.data.getMetadata("datatype") === "number") {
+        if (this.data.getMetadata('datatype') === 'number') {
             return this.aggregate(count);
         }
         return this.aggregate({
             aggregator: count,
-            name: inName || "count",
+            name: inName || 'count',
         });
     }
     mean (selector = undefined, inName = undefined) {
-        if (this.data.getMetadata("datatype") === "number") {
+        if (this.data.getMetadata('datatype') === 'number') {
             return this.aggregate(mean);
         }
         const { accessor, name } = createNamedAccessor(selector);
         return this.aggregate({
             aggregator: items => mean(items, accessor),
-            name: inName || (name && `mean(${name})`) || "mean",
+            name: inName || (name && `mean(${name})`) || 'mean',
         });
     }
     calculate (name, selector) {

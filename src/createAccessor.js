@@ -1,7 +1,7 @@
 const identity = x => x;
 
 export function createAccessor (selector = identity) {
-    if (typeof selector === "string" || selector instanceof String) {
+    if (typeof selector === 'string' || selector instanceof String) {
         return x => x[selector];
     } else if (selector instanceof Array) {
         const selectorArray = selector.map(createAccessor);
@@ -9,12 +9,12 @@ export function createAccessor (selector = identity) {
     } else if (selector instanceof Function) {
         return selector;
     } else {
-        throw new Error("Not a valid selector");
+        throw new Error('Not a valid selector');
     }
 }
 
 export function createNamedAccessor (selector = identity, inName = undefined) {
-    const name = inName || ((typeof selector === "string") ? selector : undefined);
+    const name = inName || ((typeof selector === 'string') ? selector : undefined);
     if (selector instanceof Array) {
         const selectorArray = selector.map(createNamedAccessor);
         return {

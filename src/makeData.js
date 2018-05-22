@@ -1,5 +1,5 @@
-import InternalDatasource from "./InternalDatasource";
-import combineObjects from "./combineObjects";
+import InternalDatasource from './InternalDatasource';
+import combineObjects from './combineObjects';
 
 export default function makeData (data, metadata = {}) {
     if (data instanceof InternalDatasource) {

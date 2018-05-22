@@ -1,6 +1,8 @@
-import aggregate from "./index.js";
-import moment from "moment";
-import "babel-polyfill";
+/* eslint-disable no-console */
+
+import aggregate from './index.js';
+import moment from 'moment';
+import 'babel-polyfill';
 
 function *range (count) {
     let ii = 0;
@@ -28,19 +30,19 @@ function randomDate () {
 
 function makeData(count = 50) {
     const result = [];
-    for (const ii of range(count)) {
+    range(count).forEach(() => {
         result.push({
-            name: randomChoice(["Mitchel", "Ashley", "Michael", "Sadie"]),
+            name: randomChoice(['Mitchel', 'Ashley', 'Michael', 'Sadie']),
             amount: randomFloat(25, 100),
-            type: randomChoice(["Check", "Check", "Check", "Online", "Cash"]),
+            type: randomChoice(['Check', 'Check', 'Check', 'Online', 'Cash']),
             date: randomDate(),
         });
-    }
+    });
     return result;
 }
 
-const data = aggregate.data(makeData()).calculate("month", x => x.date.month());
-console.log(JSON.stringify(data.groupBy("type").count().orderBy("count").value()));
-console.log(JSON.stringify(data.groupBy("month").count().orderBy("month").value()));
+const data = aggregate.data(makeData()).calculate('month', x => x.date.month());
+console.log(JSON.stringify(data.groupBy('type').count().orderBy('count').value()));
+console.log(JSON.stringify(data.groupBy('month').count().orderBy('month').value()));
 
 aggregate.data([1, 3, 5]).count().value();
