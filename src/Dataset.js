@@ -2,12 +2,12 @@ import makeData from './makeData';
 import { createNamedAccessor, createAccessor } from './createAccessor';
 import InternalDatasource from './InternalDatasource';
 import deepEqual from 'deep-equal';
-import { orderBy } from 'lodash';
+import orderBy from 'lodash/orderBy';
 import combineObjects from './combineObjects';
 
 
-function partition (data, accessor) {
-    const result = [];
+function partition (data, accessor, requiredBuckets = []) {
+    const result = requiredBuckets.map((value) => ({ value, items: [] }));
     for (const datum of data) {
         const value = accessor(datum);
         const bucket = result.find(b => deepEqual(b.value, value, { strict: true }));
@@ -20,12 +20,12 @@ function partition (data, accessor) {
     return result;
 }
 
-function applyGrouping (datasource, groupers) {
+function applyGrouping (datasource, groupers, ensuredGroups = []) {
     if (datasource.level > 0) {
-        return new InternalDatasource(datasource.data.map(group => applyGrouping(group, groupers)), datasource.level + 1, datasource.metadata);
+        return new InternalDatasource(datasource.data.map(group => applyGrouping(group, groupers, ensuredGroups)), datasource.level + 1, datasource.metadata);
     } else {
         return new InternalDatasource(
-            partition(datasource.data, groupers.accessor)
+            partition(datasource.data, groupers.accessor, ensuredGroups)
                 .map(({ value, items }) =>
                     new InternalDatasource(items, 0, combineObjects(
                         datasource.metadata,
@@ -86,7 +86,7 @@ function applyOrderBy (datasource, orderers) {
         const data = datasource.data.map(datum => applyOrderBy(datum, orderers));
         return new InternalDatasource(data, datasource.level, datasource.metadata);
     } else {
-        const data = orderBy(datasource.data, orderers);
+        const data = _.orderBy(datasource.data, orderers);
         return new InternalDatasource(data, 0, datasource.metadata);
     }
 }
@@ -117,10 +117,10 @@ export class Dataset {
     constructor (initData, metadata) {
         this.data = makeData(initData, metadata);
     }
-    groupBy (inSelectors) {
+    groupBy (inSelectors, ensureGroups = []) {
         const selectors = (inSelectors instanceof Array) ? inSelectors : [inSelectors];
         const accessor = createNamedAccessor(selectors);
-        return new Dataset(applyGrouping(this.data, accessor));
+        return new Dataset(applyGrouping(this.data, accessor, ensureGroups));
     }
     aggregate (inAggregators) {
         if (inAggregators instanceof Function) {

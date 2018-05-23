@@ -16,7 +16,7 @@ export function createAccessor (selector = identity) {
 export function createNamedAccessor (selector = identity, inName = undefined) {
     const name = inName || ((typeof selector === 'string') ? selector : undefined);
     if (selector instanceof Array) {
-        const selectorArray = selector.map(createNamedAccessor);
+        const selectorArray = selector.map(s => createNamedAccessor(s));
         return {
             accessor: x => selectorArray.map(s => s.accessor(x)),
             name: selectorArray.map(s => s.name),
