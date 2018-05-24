@@ -4,6 +4,7 @@
     ],
     "plugins": [
         "transform-runtime",
-        "add-module-exports"
+        "add-module-exports",
+        "external-helpers"
     ]
 }

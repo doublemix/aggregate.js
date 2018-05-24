@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 var expect = require('chai').expect;
-var aggregate = require('../src/index').default;
+var aggregate = require('../src/index');
 var { createAccessor, createNamedAccessor } = require('../src/createAccessor');
 const lodash = require('lodash/orderBy');
 

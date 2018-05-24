@@ -86,7 +86,7 @@ function applyOrderBy (datasource, orderers) {
         const data = datasource.data.map(datum => applyOrderBy(datum, orderers));
         return new InternalDatasource(data, datasource.level, datasource.metadata);
     } else {
-        const data = _.orderBy(datasource.data, orderers);
+        const data = orderBy(datasource.data, orderers);
         return new InternalDatasource(data, 0, datasource.metadata);
     }
 }
